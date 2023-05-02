@@ -1,4 +1,4 @@
-// sample customer objects
+// Define customer objects with relevant properties
 const timmy = {
     prescription: "acetaminophen",
     pricePerRefill: 25,
@@ -23,17 +23,17 @@ const rocky = {
     coupon: true,
 }
 
-//Function to calculate the refill total.
+// Define a function to calculate the refill total based on customer properties
 
 function calculateRefill (customer){
     const  totalRefill = customer.pricePerRefill*customer.refills;
     return totalRefill;
 }
 
-//Function to calculate the total after subscription applied.
+// Define a function to calculate the total after a subscription discount is applied
 
 function calculateSubscription( totalRefill, hasSubscription ){
-const total = totalRefill;
+let total = totalRefill;
 
 if(hasSubscription) {
 const subscriptionDiscount = totalRefill*0.25;
@@ -45,10 +45,10 @@ total-= subscriptionDiscount;
 return total;
 }
 
-//function to calculate the total after the coupon applied.
+// Define a function to calculate the total after a coupon discount is applied
 
 function calculateCoupon (subscriptionTotal, hasCoupon) {
-const total = subscriptionTotal;
+let total = subscriptionTotal;
 
 if(hasCoupon) {
 total -= 10;
@@ -58,10 +58,24 @@ return total
 }
 
 
-//function for final output
-function final(total){
-
+// Define a function to format the final output string
+function finalOutput(total){
     return `Your grand total is $${total}.`;
 }
 
 
+// Define a function to test the cost calculation for a given customer
+
+function totalForCustomer( customer){
+const totalRefill = calculateRefill(customer);
+const subscriptionTotal =calculateSubscription(totalRefill, customer.subscription);
+const couponTotal = calculateCoupon(subscriptionTotal, customer.coupon);
+const finalAmount=couponTotal.toFixed(2);
+return finalOutput (finalAmount);
+
+
+}
+// Test the cost calculation for each customer
+console.log (totalForCustomer(timmy));
+console.log (totalForCustomer(sarah));
+console.log (totalForCustomer(rocky));
